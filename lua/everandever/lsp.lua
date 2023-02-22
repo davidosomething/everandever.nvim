@@ -58,7 +58,7 @@ end
 ---| `VERTICAL`   # vertical progress bar
 ---| `HORIZONTAL` # horizontal progress bar
 M.status_progress = function(filter, charset)
-  charset = charset or 'VERTICAL'
+  charset = charset or "VERTICAL"
   ---@type ProgressMessage[]
   local messages = M.get_progress_messages(filter)
   if #messages == 0 then
@@ -88,7 +88,7 @@ M.status_progress = function(filter, charset)
   if lowest.name == "null-ls" then
     lowest.name = "null-ls[" .. lowest.message .. "]"
   end
-  local progress = require('everandever.progress')
+  local progress = require("everandever.progress")
   local bar = progress.character(progress[charset], lowest.percentage)
   return { messages = messages, lowest = lowest, bar = bar }
 end

@@ -12,7 +12,7 @@
 ---@return table heirline component
 return function(opts)
   opts = opts or {}
-  return vim.tbl_deep_extend('force', {
+  return vim.tbl_deep_extend("force", {
     condition = require("heirline.conditions").lsp_attached,
     update = {
       "LspAttach",

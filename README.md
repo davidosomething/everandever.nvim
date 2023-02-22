@@ -17,6 +17,16 @@ required.
 
 ## Usage
 
+Make sure your statusline (or tabline or winbar) updates on the following
+autocmd events:
+
+```
+"LspAttach",
+"LspDetach",
+"User LspProgressUpdate",
+"User LspRequest",
+```
+
 ### Get progress messages for given buffer
 
 ```lua

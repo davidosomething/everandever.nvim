@@ -54,7 +54,9 @@ end
 ---               - id (number): Only return clients with the given id
 ---               - bufnr (number): Only return clients attached to this buffer
 ---               - name (string): Only return clients with the given name
----@param charset 'VERTICAL'|'HORIZONTAL'
+---@param charset? string
+---| `VERTICAL`   # vertical progress bar
+---| `HORIZONTAL` # horizontal progress bar
 M.status_progress = function(filter, charset)
   charset = charset or 'VERTICAL'
   ---@type ProgressMessage[]

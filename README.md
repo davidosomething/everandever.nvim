@@ -49,9 +49,22 @@ vim.pretty_print(
 )
 ```
 
-### heirline example
+### lualine example
 
-Can be found [here](./lua/everandever/heirline.lua)
+```lua
+local function lspprogress()
+  local data = require('everandever.progress').status_progress({ bufnr = 0 })
+  return " " .. data.bar .. " " .. data.lowest.name .. " "
+end
+
+...
+
+sections = { lualine_c = { lspprogress } }
+```
+
+### heirline.nvim example
+
+Can be found [here](./lua/everandever/heirline.lua) (very similar to lualine)
 
 ## License
 

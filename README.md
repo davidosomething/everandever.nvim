@@ -1,7 +1,9 @@
 # everandever.nvim
 
-Lua utilities for composing an LSP progress indicator.
+Lua utilities for composing an LSP progress indicator.  
 See a [demo video](https://user-images.githubusercontent.com/609213/220507323-635ef4c1-1089-432e-96e8-73b4493051f9.mp4)
+
+![screenshot](https://user-images.githubusercontent.com/609213/220508168-83671d58-511b-4dc5-a586-334713898275.png)
 
 ## Installation
 
@@ -20,7 +22,7 @@ required.
 Make sure your statusline (or tabline or winbar) updates on the following
 autocmd events:
 
-```
+```lua
 "LspAttach",
 "LspDetach",
 "User LspProgressUpdate",

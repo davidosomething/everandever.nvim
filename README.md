@@ -1,6 +1,7 @@
 # everandever.nvim
 
 Lua utilities for composing an LSP progress indicator.
+See a [demo video](https://user-images.githubusercontent.com/609213/220507323-635ef4c1-1089-432e-96e8-73b4493051f9.mp4)
 
 ## Installation
 

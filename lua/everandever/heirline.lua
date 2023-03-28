@@ -23,7 +23,7 @@ return function(opts)
     provider = function()
       local data = require("everandever.lsp").status_progress({ bufnr = 0 })
       if data then
-        return " " .. data.bar .. " " .. data.lowest.name .. " "
+        return (" %s $s "):format(data.bar, data.lowest.name)
       end
       return ""
     end,

@@ -85,8 +85,8 @@ M.status_progress = function(filter, charset)
     return nil
   end
 
-  if lowest.name == "null-ls" then
-    lowest.name = "null-ls[" .. lowest.message .. "]"
+  if lowest.name == "null-ls" and lowest.message then
+    lowest.name = ("null-ls[%s]"):format(lowest.message)
   end
   local progress = require("everandever.progress")
   local bar = progress.character(progress[charset], lowest.percentage)

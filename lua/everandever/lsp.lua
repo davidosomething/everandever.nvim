@@ -21,6 +21,40 @@ function M.get_progress_messages(filter)
   local progress_remove = {}
 
   for _, client in ipairs(vim.lsp.get_active_clients(filter)) do
+
+    -- @TODO switch to client.progress only
+    -- https://github.com/neovim/neovim/pull/23958/files#diff-de132e20a0c678f2ff3234a05d868b0d118561cb72317910e7f28839640ed2e3R363-R388
+    if vim.lsp.status then
+      local groups = {}
+      for progress in client.progress do
+        local value = progress.value
+        if type(value) == 'table' and value.kind then
+          local group = groups[progress.token]
+          if not group then
+            group = {
+              done = false,
+              progress = true,
+              title = 'empty title',
+            }
+            groups[progress.token] = group
+          end
+          group.title = value.title or group.title
+          group.cancellable = value.cancellable or group.cancellable
+          if value.kind == 'end' then
+            group.done = true
+          end
+          group.message = value.message or group.message
+          group.percentage = value.percentage or group.percentage
+        end
+      end
+
+      for _, group in pairs(groups) do
+        table.insert(new_messages, group)
+      end
+    end
+    -- @TODO end
+
+
     local messages = client.messages
     local data = messages
     for token, ctx in pairs(data.progress) do
@@ -59,8 +93,16 @@ end
 ---| `HORIZONTAL` # horizontal progress bar
 M.status_progress = function(filter, charset)
   charset = charset or "VERTICAL"
-  ---@type ProgressMessage[]
-  local messages = M.get_progress_messages(filter)
+
+  local messages
+  if vim.lsp.status then
+    local message = vim.lsp.status()
+    messages = message == '' and {} or { message }
+  else
+    ---@type ProgressMessage[]
+    messages = M.get_progress_messages(filter)
+  end
+
   if #messages == 0 then
     return nil
   end

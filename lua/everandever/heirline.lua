@@ -12,12 +12,18 @@
 ---@return table heirline component
 return function(opts)
   opts = opts or {}
+
+  -- as of https://github.com/neovim/neovim/pull/23958/files
+  local lsp_progress_event = vim.fn.exists("##LspProgress") == 1
+      and "LspProgress"
+    or "User LspProgressUpdate"
+
   return vim.tbl_deep_extend("force", {
     condition = require("heirline.conditions").lsp_attached,
     update = {
       "LspAttach",
       "LspDetach",
-      "User LspProgressUpdate",
+      lsp_progress_event,
       "User LspRequest",
     },
     provider = function()
